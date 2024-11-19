@@ -9,8 +9,9 @@ export class Iterator<T> implements IterableIterator<T> {
 	  this.cb = cb;
 	  this.data = data;
    }
-   reset() {
-	  this._it = 0;
+   reset(offset?: number) {
+	  // TODO: restrict bounds to within iterated range & preserver parity.
+	  this._it = offset ? this._it + offset : 0;
    }
    next(): IteratorResult<T> {
 	  const value = this.cb ? this.cb(this.data, this._it) : null;

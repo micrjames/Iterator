@@ -43,6 +43,7 @@ describe("An Iterator of numbers", () => {
 		 test.todo("Should not generate a further value.");
 	  });
 	  describe("That has been reset", () => {
+		 // TODO: test for 'reset by offset'
 		 beforeAll(() => {
 			iter.reset();
 		 });
