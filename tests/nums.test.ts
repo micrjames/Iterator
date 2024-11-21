@@ -7,19 +7,42 @@ describe("An Iterator of numbers", () => {
 	   numbers = [1, 2, 3, 4, 5];
    });
    describe("That Doesn't Iterate", () => {
+	  let nextNum: IteratorResult<number>; 
+	  let nextNumValue: number;
+	  let nextNumDone: boolean;
 	  describe("With No Data", () => {
 		 beforeAll(() => {
 			iter = new Iterator();
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
 		 });
-		 test.todo("Should exist");
-		 test.todo("Should not generate a value.");
+		 test("Should exist", () => {
+			expect(iter).toBeDefined();
+		 });
+		 test("Should not generate a value.", () => {
+			expect(nextNumValue).toBeNull();
+		   	expect(nextNumDone).toBeTruthy();
+		 });
 	  });
 	  describe("With a Value Function And No Endpoint", () => {
 		 beforeAll(() => {
 			iter = new Iterator(numbers, (numbers, it) => numbers[it]);
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
 		 });
-		 test.todo("Should generate the first value.");
-		 test.todo("Should not generate a further value.");
+		 test("Should generate the first value.", () => {
+			expect(nextNumValue).toBe(numbers[0]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should not generate a further value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
 	  });
    });
    describe("That Is Iterated", () => {

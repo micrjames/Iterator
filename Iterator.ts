@@ -14,17 +14,23 @@ export class Iterator<T> implements IterableIterator<T> {
 	  this._it = offset ? this._it + offset : 0;
    }
    next(): IteratorResult<T> {
-	  const value = this.cb ? this.cb(this.data, this._it) : null;
-	  if(this._it > this._endpoint) {
+	  if(this.data) {
+		 const value = this.cb ? this.cb(this.data, this._it) : null;
+		 if(this._it > this._endpoint) {
+			return {
+			   done: true,
+			   value: null
+			};
+		 }
+		 this._it++;
 		 return {
-			done: true,
-			value: null
+			done: false,
+			value
 		 };
 	  }
-	  this._it++;
 	  return {
-		 done: false,
-		 value
+		 done: true,
+		 value: null
 	  };
    }
    [Symbol.iterator](): IterableIterator<T> {
