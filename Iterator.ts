@@ -10,7 +10,7 @@ export class Iterator<T> implements IterableIterator<T> {
 	  this.data = data;
    }
    reset(offset?: number) {
-	  // TODO: restrict bounds to within iterated range & preserver parity.
+	  // TODO: restrict bounds to within iterated range & preserve parity.
 	  this._it = offset ? this._it + offset : 0;
    }
    next(): IteratorResult<T> {

@@ -46,16 +46,61 @@ describe("An Iterator of numbers", () => {
 	  });
    });
    describe("That Is Iterated", () => {
+	  let nextNum: IteratorResult<number>; 
+	  let nextNumValue: number;
+	  let nextNumDone: boolean;
+	  let it: number;
 	  beforeAll(() => {
 		 iter = new Iterator(numbers, (numbers, it) => numbers[it], numbers.length-1);
+		 it = 0;
 	  });
 	  describe("With a Value Function And An Endpoint", () => {
-		 test.todo("Should generate the first value.");
-		 test.todo("Should generate the second value.");
-		 test.todo("Should generate the third value.");
-		 test.todo("Should generate the fourth value.");
-		 test.todo("Should generate the fifth value.");
-		 test.todo("Should not generate a further value.");
+		 test("Should generate the first value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBe(numbers[it]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should generate the second value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			it++;
+			expect(nextNumValue).toBe(numbers[it]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should generate the third value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			it++;
+			expect(nextNumValue).toBe(numbers[it]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should generate the fourth value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			it++;
+			expect(nextNumValue).toBe(numbers[it]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should generate the fifth value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			it++;
+			expect(nextNumValue).toBe(numbers[it]);
+			expect(nextNumDone).toBeFalsy();
+		 });
+		 test("Should not generate a further value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
 	  });
 	  describe("That Has Been Used Up", () => {
 		 test.todo("Should not generate the first value.");
