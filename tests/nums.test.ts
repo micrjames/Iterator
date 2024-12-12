@@ -103,12 +103,48 @@ describe("An Iterator of numbers", () => {
 		 });
 	  });
 	  describe("That Has Been Used Up", () => {
-		 test.todo("Should not generate the first value.");
-		 test.todo("Should not generate the second value.");
-		 test.todo("Should not generate the third value.");
-		 test.todo("Should not generate the fourth value.");
-		 test.todo("Should not generate the fifth value.");
-		 test.todo("Should not generate a further value.");
+		 test("Should not generate the first value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
+		 test("Should not generate the second value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
+		 test("Should not generate the third value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
+		 test("Should not generate the fourth value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
+		 test("Should not generate the fifth value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
+		 test("Should not generate a further value.", () => {
+			nextNum = iter.next();
+			nextNumValue = nextNum.value;
+			nextNumDone = nextNum.done;
+			expect(nextNumValue).toBeNull();
+			expect(nextNumDone).toBeTruthy();
+		 });
 	  });
 	  describe("That has been reset", () => {
 		 // TODO: test for 'reset by offset'
