@@ -147,16 +147,42 @@ describe("An Iterator of numbers", () => {
 		 });
 	  });
 	  describe("That has been reset", () => {
-		 // TODO: test for 'reset by offset'
-		 beforeAll(() => {
-			iter.reset();
+		 describe("By Offset", () => {
+			beforeAll(() => {
+			   iter.reset(-5);
+			});
+			describe("Outside of Positive Parity", () => {
+			   test.todo("Should not generate the first value.");
+			   test.todo("Should not generate the second value.");
+			   test.todo("Should not generate the third value.");
+			   test.todo("Should not generate the fourth value.");
+			   test.todo("Should not generate the fifth value.");
+			   test.todo("Should not generate a further value.");
+			});
+			describe("Outside of Range", () => {
+			});
+			describe("Within Range and Of Positive Parity", () => {
+			   test.todo("Should generate the first value.");
+			   test.todo("Should generate the second value.");
+			   test.todo("Should generate the third value.");
+			   test.todo("Should generate the fourth value.");
+			   test.todo("Should generate the fifth value.");
+			   test.todo("Should not generate a further value.");
+			});
 		 });
-		 test.todo("Should generate the first value.");
-		 test.todo("Should generate the second value.");
-		 test.todo("Should generate the third value.");
-		 test.todo("Should generate the fourth value.");
-		 test.todo("Should generate the fifth value.");
-		 test.todo("Should not generate a further value.");
+		 describe("Not By Offset", () => {
+			describe("Back to Beginning of the Data Set", () => {
+			   beforeAll(() => {
+				  iter.reset();
+			   });
+			   test.todo("Should generate the first value.");
+			   test.todo("Should generate the second value.");
+			   test.todo("Should generate the third value.");
+			   test.todo("Should generate the fourth value.");
+			   test.todo("Should generate the fifth value.");
+			   test.todo("Should not generate a further value.");
+			});
+		 });
 	  });
    });
 });
