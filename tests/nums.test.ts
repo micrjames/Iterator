@@ -1,5 +1,5 @@
 import { Iterator } from "../Iterator";
-import { getItered, expectIterEnd } from "./utils";
+import { getItered, expectIterEnd, expectIter } from "./utils"; 
 
 describe("An Iterator of numbers", () => {
    let numbers: number[];
@@ -8,176 +8,139 @@ describe("An Iterator of numbers", () => {
 	   numbers = [1, 2, 3, 4, 5];
    });
    describe("That Doesn't Iterate", () => {
-	  let nextNumValue: number;
-	  let nextNumDone: boolean;
+	  let itered: [number, boolean];
 	  describe("With No Data", () => {
 		 beforeAll(() => {
 			iter = new Iterator();
-			[nextNumValue, nextNumDone] = getItered(iter);
+			itered = getItered(iter);
 		 });
 		 test("Should exist", () => {
 			expect(iter).toBeDefined();
 		 });
 		 test("Should not generate a value.", () => {
-			expectIterEnd(nextNumValue, nextNumDone);
+			expectIterEnd(...itered);
 		 });
 	  });
 	  describe("With a Value Function And No Endpoint", () => {
 		 beforeAll(() => {
 			iter = new Iterator(numbers, (numbers, it) => numbers[it]);
-			[nextNumValue, nextNumDone] = getItered(iter);
+		 });
+		 beforeEach(() => {
+			itered = getItered(iter);
 		 });
 		 test("Should generate the first value.", () => {
-			expect(nextNumValue).toBe(numbers[0]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[0], ...itered);
 		 });
 		 test("Should not generate a further value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expectIterEnd(nextNumValue, nextNumDone);
+			expectIterEnd(...itered);
 		 });
 	  });
    });
    describe("That Is Iterated", () => {
-	  let nextNumValue: number;
-	  let nextNumDone: boolean;
+	  let itered: [number, boolean];
 	  let it: number;
 	  beforeAll(() => {
 		 iter = new Iterator(numbers, (numbers, it) => numbers[it], numbers.length-1);
-		 it = 0;
+		 it = -1;
 	  });
 	  describe("With a Value Function And An Endpoint", () => {
+		 beforeEach(() => {
+			itered = getItered(iter);
+			it++;
+		 });
 		 test("Should generate the first value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBe(numbers[it]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[it], ...itered);
 		 });
 		 test("Should generate the second value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			it++;
-			expect(nextNumValue).toBe(numbers[it]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[it], ...itered);
 		 });
 		 test("Should generate the third value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			it++;
-			expect(nextNumValue).toBe(numbers[it]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[it], ...itered);
 		 });
 		 test("Should generate the fourth value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			it++;
-			expect(nextNumValue).toBe(numbers[it]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[it], ...itered);
 		 });
 		 test("Should generate the fifth value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			it++;
-			expect(nextNumValue).toBe(numbers[it]);
-			expect(nextNumDone).toBeFalsy();
+			expectIter(numbers[it], ...itered);
 		 });
 		 test("Should not generate a further value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 	  });
 	  describe("That Has Been Used Up", () => {
+		 beforeEach(() => {
+			itered = getItered(iter);
+		 });
 		 test("Should not generate the first value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 		 test("Should not generate the second value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 		 test("Should not generate the third value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 		 test("Should not generate the fourth value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 		 test("Should not generate the fifth value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(...itered);
 		 });
 		 test("Should not generate a further value.", () => {
-			[nextNumValue, nextNumDone] = getItered(iter);
-			expectIterEnd(nextNumValue, nextNumDone);
+			expectIterEnd(...itered);
 		 });
 	  });
 	  describe("That has been reset", () => {
 		 describe("By Offset", () => {
 			beforeAll(() => {
 			   iter.reset(-5);
-			   it = 0;
+			   it = -1;
 			});
 			describe("Within Range and Of Positive Parity", () => {
+			   beforeEach(() => {
+				  itered = getItered(iter);
+				  it++;
+			   });
 			   test("Should generate the first value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBe(numbers[it]);
-				  expect(nextNumDone).toBeFalsy();
+				  expectIter(numbers[it], ...itered);
 			   });
 			   test("Should generate the second value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  it++;
-				  expect(nextNumValue).toBe(numbers[it]);
-				  expect(nextNumDone).toBeFalsy();
+				  expectIter(numbers[it], ...itered);
 			   });
 			   test("Should generate the third value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  it++;
-				  expect(nextNumValue).toBe(numbers[it]);
-				  expect(nextNumDone).toBeFalsy();
+				  expectIter(numbers[it], ...itered);
 			   });
 			   test("Should generate the fourth value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  it++;
-				  expect(nextNumValue).toBe(numbers[it]);
-				  expect(nextNumDone).toBeFalsy();
+				  expectIter(numbers[it], ...itered);
 			   });
 			   test("Should generate the fifth value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  it++;
-				  expect(nextNumValue).toBe(numbers[it]);
-				  expect(nextNumDone).toBeFalsy();
+				  expectIter(numbers[it], ...itered);
 			   });
 			   test("Should not generate a further value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  it++;
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			});
 			describe("Outside of Positive Parity", () => {
+			   beforeEach(() => {
+				  itered = getItered(iter);
+			   });
 			   test("Should not generate the first value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should not generate the second value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should not generate the third value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should not generate the fourth value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should not generate the fifth value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should not generate a further value.", () => {
-				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expectIterEnd(nextNumValue, nextNumDone);
+				  expectIterEnd(...itered);
 			   });
 			   test("Should throw 'Outside Positive Parity' error.", () => {
 				  expect(() => {
