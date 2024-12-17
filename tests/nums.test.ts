@@ -150,6 +150,56 @@ describe("An Iterator of numbers", () => {
 		 describe("By Offset", () => {
 			beforeAll(() => {
 			   iter.reset(-5);
+			   it = 0;
+			});
+			describe("Within Range and Of Positive Parity", () => {
+			   test("Should generate the first value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBe(numbers[it]);
+				  expect(nextNumDone).toBeFalsy();
+			   });
+			   test("Should generate the second value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  it++;
+				  expect(nextNumValue).toBe(numbers[it]);
+				  expect(nextNumDone).toBeFalsy();
+			   });
+			   test("Should generate the third value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  it++;
+				  expect(nextNumValue).toBe(numbers[it]);
+				  expect(nextNumDone).toBeFalsy();
+			   });
+			   test("Should generate the fourth value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  it++;
+				  expect(nextNumValue).toBe(numbers[it]);
+				  expect(nextNumDone).toBeFalsy();
+			   });
+			   test("Should generate the fifth value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  it++;
+				  expect(nextNumValue).toBe(numbers[it]);
+				  expect(nextNumDone).toBeFalsy();
+			   });
+			   test("Should not generate a further value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  it++;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
 			});
 			describe("Outside of Positive Parity", () => {
 			   test.todo("Should not generate the first value.");
@@ -160,14 +210,6 @@ describe("An Iterator of numbers", () => {
 			   test.todo("Should not generate a further value.");
 			});
 			describe("Outside of Range", () => {
-			});
-			describe("Within Range and Of Positive Parity", () => {
-			   test.todo("Should generate the first value.");
-			   test.todo("Should generate the second value.");
-			   test.todo("Should generate the third value.");
-			   test.todo("Should generate the fourth value.");
-			   test.todo("Should generate the fifth value.");
-			   test.todo("Should not generate a further value.");
 			});
 		 });
 		 describe("Not By Offset", () => {
