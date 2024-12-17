@@ -1,4 +1,5 @@
 import { Iterator } from "../Iterator";
+import { getItered } from "./utils";
 
 describe("An Iterator of numbers", () => {
    let numbers: number[];
@@ -13,9 +14,7 @@ describe("An Iterator of numbers", () => {
 	  describe("With No Data", () => {
 		 beforeAll(() => {
 			iter = new Iterator();
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 		 });
 		 test("Should exist", () => {
 			expect(iter).toBeDefined();
@@ -28,9 +27,7 @@ describe("An Iterator of numbers", () => {
 	  describe("With a Value Function And No Endpoint", () => {
 		 beforeAll(() => {
 			iter = new Iterator(numbers, (numbers, it) => numbers[it]);
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 		 });
 		 test("Should generate the first value.", () => {
 			expect(nextNumValue).toBe(numbers[0]);
