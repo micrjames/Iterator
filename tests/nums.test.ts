@@ -53,48 +53,36 @@ describe("An Iterator of numbers", () => {
 	  });
 	  describe("With a Value Function And An Endpoint", () => {
 		 test("Should generate the first value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBe(numbers[it]);
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should generate the second value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			it++;
 			expect(nextNumValue).toBe(numbers[it]);
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should generate the third value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			it++;
 			expect(nextNumValue).toBe(numbers[it]);
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should generate the fourth value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			it++;
 			expect(nextNumValue).toBe(numbers[it]);
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should generate the fifth value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			it++;
 			expect(nextNumValue).toBe(numbers[it]);
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should not generate a further value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
@@ -108,37 +96,27 @@ describe("An Iterator of numbers", () => {
 			expect(nextNumDone).toBeTruthy();
 		 });
 		 test("Should not generate the second value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
 		 test("Should not generate the third value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
 		 test("Should not generate the fourth value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
 		 test("Should not generate the fifth value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
 		 test("Should not generate a further value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
@@ -151,48 +129,36 @@ describe("An Iterator of numbers", () => {
 			});
 			describe("Within Range and Of Positive Parity", () => {
 			   test("Should generate the first value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBe(numbers[it]);
 				  expect(nextNumDone).toBeFalsy();
 			   });
 			   test("Should generate the second value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
 				  expect(nextNumValue).toBe(numbers[it]);
 				  expect(nextNumDone).toBeFalsy();
 			   });
 			   test("Should generate the third value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
 				  expect(nextNumValue).toBe(numbers[it]);
 				  expect(nextNumDone).toBeFalsy();
 			   });
 			   test("Should generate the fourth value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
 				  expect(nextNumValue).toBe(numbers[it]);
 				  expect(nextNumDone).toBeFalsy();
 			   });
 			   test("Should generate the fifth value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
 				  expect(nextNumValue).toBe(numbers[it]);
 				  expect(nextNumDone).toBeFalsy();
 			   });
 			   test("Should not generate a further value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
@@ -200,44 +166,32 @@ describe("An Iterator of numbers", () => {
 			});
 			describe("Outside of Positive Parity", () => {
 			   test("Should not generate the first value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
 			   test("Should not generate the second value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
 			   test("Should not generate the third value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
 			   test("Should not generate the fourth value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
 			   test("Should not generate the fifth value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
 			   test("Should not generate a further value.", () => {
-				  nextNum = iter.next();
-				  nextNumValue = nextNum.value;
-				  nextNumDone = nextNum.done;
+				  [nextNumValue, nextNumDone] = getItered(iter);
 				  expect(nextNumValue).toBeNull();
 				  expect(nextNumDone).toBeTruthy();
 			   });
