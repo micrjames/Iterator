@@ -1,5 +1,5 @@
 import { Iterator } from "../Iterator";
-import { getItered } from "./utils";
+import { getItered, expectIterEnd } from "./utils";
 
 describe("An Iterator of numbers", () => {
    let numbers: number[];
@@ -8,7 +8,6 @@ describe("An Iterator of numbers", () => {
 	   numbers = [1, 2, 3, 4, 5];
    });
    describe("That Doesn't Iterate", () => {
-	  let nextNum: IteratorResult<number>; 
 	  let nextNumValue: number;
 	  let nextNumDone: boolean;
 	  describe("With No Data", () => {
@@ -20,8 +19,7 @@ describe("An Iterator of numbers", () => {
 			expect(iter).toBeDefined();
 		 });
 		 test("Should not generate a value.", () => {
-			expect(nextNumValue).toBeNull();
-		   	expect(nextNumDone).toBeTruthy();
+			expectIterEnd(nextNumValue, nextNumDone);
 		 });
 	  });
 	  describe("With a Value Function And No Endpoint", () => {
@@ -34,16 +32,12 @@ describe("An Iterator of numbers", () => {
 			expect(nextNumDone).toBeFalsy();
 		 });
 		 test("Should not generate a further value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			[nextNumValue, nextNumDone] = getItered(iter);
+			expectIterEnd(nextNumValue, nextNumDone);
 		 });
 	  });
    });
    describe("That Is Iterated", () => {
-	  let nextNum: IteratorResult<number>; 
 	  let nextNumValue: number;
 	  let nextNumDone: boolean;
 	  let it: number;
@@ -89,9 +83,7 @@ describe("An Iterator of numbers", () => {
 	  });
 	  describe("That Has Been Used Up", () => {
 		 test("Should not generate the first value.", () => {
-			nextNum = iter.next();
-			nextNumValue = nextNum.value;
-			nextNumDone = nextNum.done;
+			[nextNumValue, nextNumDone] = getItered(iter);
 			expect(nextNumValue).toBeNull();
 			expect(nextNumDone).toBeTruthy();
 		 });
@@ -117,8 +109,7 @@ describe("An Iterator of numbers", () => {
 		 });
 		 test("Should not generate a further value.", () => {
 			[nextNumValue, nextNumDone] = getItered(iter);
-			expect(nextNumValue).toBeNull();
-			expect(nextNumDone).toBeTruthy();
+			expectIterEnd(nextNumValue, nextNumDone);
 		 });
 	  });
 	  describe("That has been reset", () => {
@@ -160,40 +151,33 @@ describe("An Iterator of numbers", () => {
 			   test("Should not generate a further value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
 				  it++;
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			});
 			describe("Outside of Positive Parity", () => {
 			   test("Should not generate the first value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should not generate the second value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should not generate the third value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should not generate the fourth value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should not generate the fifth value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should not generate a further value.", () => {
 				  [nextNumValue, nextNumDone] = getItered(iter);
-				  expect(nextNumValue).toBeNull();
-				  expect(nextNumDone).toBeTruthy();
+				  expectIterEnd(nextNumValue, nextNumDone);
 			   });
 			   test("Should throw 'Outside Positive Parity' error.", () => {
 				  expect(() => {
