@@ -202,14 +202,62 @@ describe("An Iterator of numbers", () => {
 			   });
 			});
 			describe("Outside of Positive Parity", () => {
+			   test("Should not generate the first value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should not generate the second value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should not generate the third value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should not generate the fourth value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should not generate the fifth value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should not generate a further value.", () => {
+				  nextNum = iter.next();
+				  nextNumValue = nextNum.value;
+				  nextNumDone = nextNum.done;
+				  expect(nextNumValue).toBeNull();
+				  expect(nextNumDone).toBeTruthy();
+			   });
+			   test("Should throw 'Outside Positive Parity' error.", () => {
+				  expect(() => {
+					 iter.reset(-6);
+				  }).toThrow("Outside Positive Parity");
+			   });
+			});
+			describe("Outside of Range", () => {
 			   test.todo("Should not generate the first value.");
 			   test.todo("Should not generate the second value.");
 			   test.todo("Should not generate the third value.");
 			   test.todo("Should not generate the fourth value.");
 			   test.todo("Should not generate the fifth value.");
 			   test.todo("Should not generate a further value.");
-			});
-			describe("Outside of Range", () => {
+			   test.todo("Should throw 'Out Of Range' error.");
 			});
 		 });
 		 describe("Not By Offset", () => {
