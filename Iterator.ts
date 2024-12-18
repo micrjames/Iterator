@@ -2,8 +2,10 @@ export class Iterator<T> implements IterableIterator<T> {
    private _it: number;
    private _endpoint: number;
    private cb: Function;
-   private data: unknown;
-   constructor(data?: unknown, cb?: (data: unknown, it: number) => T, endpoint: number = 0) {
+   private data: Exclude<T, Array<unknown>>;
+   constructor(data?: Exclude<T, Array<unknown>>,
+			   cb?: (data: Exclude<T, Array<unknown>>, it: number) => T,
+				  endpoint: number = 0) {
 	  this._it = 0;
 	  this._endpoint = endpoint;
 	  this.cb = cb;
@@ -33,6 +35,11 @@ export class Iterator<T> implements IterableIterator<T> {
 		 done: true,
 		 value: null
 	  };
+   }
+   get size(): number {
+	  let item: string;
+	  for(item in this.data); 
+	  return +item;
    }
    [Symbol.iterator](): IterableIterator<T> {
 	  return this;

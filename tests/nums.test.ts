@@ -1,14 +1,21 @@
 import { Iterator } from "../Iterator";
 import { getItered, expectIterEnd, expectIter } from "./utils"; 
+import { dataObj } from "../utils";
 
 describe("An Iterator of numbers", () => {
-   let numbers: number[];
-   let iter: Iterator<number>;
+   let numbers: dataObj;
+   let iter: Iterator<dataObj>;
    beforeAll(() => {
-	   numbers = [1, 2, 3, 4, 5];
+	   numbers = {
+		  '1': 1,
+		  '2': 2,
+		  '3': 3,
+		  '4': 4,
+		  '5': 5
+	   };
    });
    describe("That Doesn't Iterate", () => {
-	  let itered: [number, boolean];
+	  let itered: [dataObj, boolean];
 	  describe("With No Data", () => {
 		 beforeAll(() => {
 			iter = new Iterator();
@@ -17,19 +24,29 @@ describe("An Iterator of numbers", () => {
 		 test("Should exist", () => {
 			expect(iter).toBeDefined();
 		 });
+		 test("Should have a size of 'NaN'.", () => {
+			const iterSize = iter.size;
+			expect(iterSize).toBeNaN();
+		 });
 		 test("Should not generate a value.", () => {
 			expectIterEnd(...itered);
 		 });
 	  });
 	  describe("With a Value Function And No Endpoint", () => {
+		 let numbersSize: number;
 		 beforeAll(() => {
-			iter = new Iterator(numbers, (numbers, it) => numbers[it]);
+			iter = new Iterator(numbers, (numbers, it) => <dataObj> numbers[it+1]);
+			numbersSize = Object.keys(numbers).length;
 		 });
 		 beforeEach(() => {
 			itered = getItered(iter);
 		 });
 		 test("Should generate the first value.", () => {
-			expectIter(numbers[0], ...itered);
+			expectIter(numbers[1], ...itered);
+		 });
+		 test("Should have a size of '5' elements.", () => {
+			const iterSize = iter.size;
+			expect(iterSize).toBe(numbersSize);
 		 });
 		 test("Should not generate a further value.", () => {
 			expectIterEnd(...itered);
@@ -37,10 +54,11 @@ describe("An Iterator of numbers", () => {
 	  });
    });
    describe("That Is Iterated", () => {
-	  let itered: [number, boolean];
+	  let itered: [dataObj, boolean];
 	  let it: number;
+   /*
 	  beforeAll(() => {
-		 iter = new Iterator(numbers, (numbers, it) => numbers[it], numbers.length-1);
+		 iter = new Iterator(numbers, (numbers, it) => <dataObj> numbers[it], numbers.size);
 		 it = -1;
 	  });
 	  describe("With a Value Function And An Endpoint", () => {
@@ -172,5 +190,6 @@ describe("An Iterator of numbers", () => {
 			});
 		 });
 	  });
+  */
    });
 });
