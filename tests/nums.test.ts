@@ -56,10 +56,11 @@ describe("An Iterator of numbers", () => {
    describe("That Is Iterated", () => {
 	  let itered: [dataObj, boolean];
 	  let it: number;
-   /*
+	  let numbersSize: number;
 	  beforeAll(() => {
-		 iter = new Iterator(numbers, (numbers, it) => <dataObj> numbers[it], numbers.size);
-		 it = -1;
+		 numbersSize = Object.keys(numbers).length;
+		 iter = new Iterator(numbers, (numbers, it) => <dataObj> numbers[it+1], numbersSize-1);
+		 it = 0;
 	  });
 	  describe("With a Value Function And An Endpoint", () => {
 		 beforeEach(() => {
@@ -112,7 +113,7 @@ describe("An Iterator of numbers", () => {
 		 describe("By Offset", () => {
 			beforeAll(() => {
 			   iter.reset(-5);
-			   it = -1;
+			   it = 0;
 			});
 			describe("Within Range and Of Positive Parity", () => {
 			   beforeEach(() => {
@@ -190,6 +191,5 @@ describe("An Iterator of numbers", () => {
 			});
 		 });
 	  });
-  */
    });
 });
