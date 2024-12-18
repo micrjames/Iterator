@@ -25,6 +25,7 @@ Only plain, vanilla Typescript is used with no libraries or other packages.
     * Loop through the data using an *array-like* *iterator* method.
 * Once the data has been *iterate*d by either method, it is used up.
 * *Reset* the *iterator* to the beginning or by an *offset*. So that the data can be *iterate*d again.
+* Find the *size* of the Iterator.
 
 ## Setup
 Simply extend the *Iterator* class into the project in the usual way.
@@ -49,6 +50,9 @@ So, within the the subclass we must provide:
 In the above example, we have the *data* and the *it* variable as arguments in the *callback* function. The use of the *data* variable in the callback should be obvious. However, the *it* argument requires a small amount of explanation. Within the *Iterator* class, the value of *it* will be updated on every call of the *next* function or the *iterate*d object itself. Here, we just need to define how the *data* will be operated on for the *next* function or the *iterate*d object itself. 
 
 Once the *data* has been completely *iterate*d through, we will need to *reset* the *Iterator* so that we can do so again.
+
+We can also *reset* the iterator. Once the iterator has been used up, the iterator will stop and it will be past the last available value. Either *reset* the iterator back to the beginning by invoking the *reset* method with no argument. Supply an *offset* to set where to revert the iterator. If the *offset* causes the iterator to move out of the range of values, an error is thrown.
+ 
 
 ## Project Status
 As this code is intended to be a part of a project in itself, this project is still in progress and will be until that project is completed. 
