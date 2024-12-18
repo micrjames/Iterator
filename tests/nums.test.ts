@@ -1,18 +1,13 @@
 import { Iterator } from "../Iterator";
 import { getItered, expectIterEnd, expectIter } from "./utils"; 
 import { dataObj } from "../utils";
+import { numbers as data } from "./data";
 
 describe("An Iterator of numbers", () => {
    let numbers: dataObj;
    let iter: Iterator<dataObj>;
    beforeAll(() => {
-	   numbers = {
-		  '1': 1,
-		  '2': 2,
-		  '3': 3,
-		  '4': 4,
-		  '5': 5
-	   };
+	   numbers = data;
    });
    describe("That Doesn't Iterate", () => {
 	  let itered: [dataObj, boolean];
