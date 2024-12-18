@@ -48,4 +48,179 @@ describe("An Iterator of Points", () => {
 		 });
 	  });
    });
+   describe("That Is Iterated", () => {
+	  let itered: [dataObj, boolean];
+	  let it: number;
+	  let ptsSize: number;
+	  beforeAll(() => {
+		 ptsSize = Object.keys(pts).length;
+		 iter = new Iterator(pts, (pts, it) => <dataObj> pts[it+1], ptsSize-1);
+		 it = 0;
+	  });
+	  describe("With a Value Function And An Endpoint", () => {
+		 beforeEach(() => {
+			itered = getItered(iter);
+			it++;
+		 });
+		 test("Should generate the first value.", () => {
+			expectIter(pts[it], ...itered);
+		 });
+		 test("Should generate the second value.", () => {
+			expectIter(pts[it], ...itered);
+		 });
+		 test("Should generate the third value.", () => {
+			expectIter(pts[it], ...itered);
+		 });
+		 test("Should generate the fourth value.", () => {
+			expectIter(pts[it], ...itered);
+		 });
+		 test("Should generate the fifth value.", () => {
+			expectIter(pts[it], ...itered);
+		 });
+		 test("Should not generate a further value.", () => {
+			expectIterEnd(...itered);
+		 });
+	  });
+	  describe("That Has Been Used Up", () => {
+		 beforeEach(() => {
+			itered = getItered(iter);
+		 });
+		 test("Should not generate the first value.", () => {
+			expectIterEnd(...itered);
+		 });
+		 test("Should not generate the second value.", () => {
+			expectIterEnd(...itered);
+		 });
+		 test("Should not generate the third value.", () => {
+			expectIterEnd(...itered);
+		 });
+		 test("Should not generate the fourth value.", () => {
+			expectIterEnd(...itered);
+		 });
+		 test("Should not generate the fifth value.", () => {
+			expectIterEnd(...itered);
+		 });
+		 test("Should not generate a further value.", () => {
+			expectIterEnd(...itered);
+		 });
+	  });
+	  describe("That has been reset", () => {
+		 describe("By Offset", () => {
+			beforeAll(() => {
+			   iter.reset(-5);
+			   it = 0;
+			});
+			describe("Within Range and Of Positive Parity", () => {
+			   beforeEach(() => {
+				  itered = getItered(iter);
+				  it++;
+			   });
+			   test("Should generate the first value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the second value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the third value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the fourth value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the fifth value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			});
+			describe("Outside of Positive Parity", () => {
+			   beforeEach(() => {
+				  itered = getItered(iter);
+			   });
+			   test("Should not generate the first value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the second value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the third value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fourth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fifth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should throw 'Outside Positive Parity' error.", () => {
+				  expect(() => {
+					 iter.reset(-6);
+				  }).toThrow("Outside Positive Parity");
+			   });
+			});
+			describe("Outside of Range", () => {
+			   beforeEach(() => {
+				  itered = getItered(iter);
+			   });
+			   test("Should not generate the first value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the second value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the third value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fourth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fifth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should throw 'Out of Range' error.", () => {
+				  expect(() => {
+					 iter.reset(iter.size);
+				  }).toThrow("Out of Range");
+			   });
+			});
+		 });
+		 describe("Not By Offset", () => {
+			describe("Back to Beginning of the Data Set", () => {
+			   beforeAll(() => {
+				  iter.reset();
+				  it = 0;
+			   });
+			   beforeEach(() => {
+				  itered = getItered(iter);
+				  it++;
+			   });
+			   test("Should generate the first value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the second value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the third value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the fourth value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should generate the fifth value.", () => {
+				  expectIter(pts[it], ...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			});
+		 });
+	  });
+   });
 });
