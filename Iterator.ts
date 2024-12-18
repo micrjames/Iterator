@@ -13,8 +13,13 @@ export class Iterator<T> implements IterableIterator<T> {
    }
    reset(offset?: number) {
 	  // TODO: restrict bounds to within iterated range & preserve parity.
-	  if(this._it + offset < 0) throw new Error("Outside Positive Parity");
-	  this._it = offset ? this._it + offset : 0;
+	  if(offset) {
+		 if(this._it + offset < 0) throw new Error("Outside Positive Parity");
+		 else if(this._it + offset > this.size) throw new Error("Out of Range");
+		 this._it = offset ? this._it + offset : 0;
+	  } else {
+		 this._it = 0;
+	  }
    }
    next(): IteratorResult<T> {
 	  if(this.data) {

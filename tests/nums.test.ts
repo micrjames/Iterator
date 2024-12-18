@@ -163,13 +163,32 @@ describe("An Iterator of numbers", () => {
 			   });
 			});
 			describe("Outside of Range", () => {
-			   test.todo("Should not generate the first value.");
-			   test.todo("Should not generate the second value.");
-			   test.todo("Should not generate the third value.");
-			   test.todo("Should not generate the fourth value.");
-			   test.todo("Should not generate the fifth value.");
-			   test.todo("Should not generate a further value.");
-			   test.todo("Should throw 'Out Of Range' error.");
+			   beforeEach(() => {
+				  itered = getItered(iter);
+			   });
+			   test("Should not generate the first value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the second value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the third value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fourth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate the fifth value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
+			   test("Should throw 'Out of Range' error.", () => {
+				  expect(() => {
+					 iter.reset(iter.size);
+				  }).toThrow("Out of Range");
+			   });
 			});
 		 });
 		 describe("Not By Offset", () => {
