@@ -195,13 +195,30 @@ describe("An Iterator of numbers", () => {
 			describe("Back to Beginning of the Data Set", () => {
 			   beforeAll(() => {
 				  iter.reset();
+				  it = 0;
 			   });
-			   test.todo("Should generate the first value.");
-			   test.todo("Should generate the second value.");
-			   test.todo("Should generate the third value.");
-			   test.todo("Should generate the fourth value.");
-			   test.todo("Should generate the fifth value.");
-			   test.todo("Should not generate a further value.");
+			   beforeEach(() => {
+				  itered = getItered(iter);
+				  it++;
+			   });
+			   test("Should generate the first value.", () => {
+				  expectIter(numbers[it], ...itered);
+			   });
+			   test("Should generate the second value.", () => {
+				  expectIter(numbers[it], ...itered);
+			   });
+			   test("Should generate the third value.", () => {
+				  expectIter(numbers[it], ...itered);
+			   });
+			   test("Should generate the fourth value.", () => {
+				  expectIter(numbers[it], ...itered);
+			   });
+			   test("Should generate the fifth value.", () => {
+				  expectIter(numbers[it], ...itered);
+			   });
+			   test("Should not generate a further value.", () => {
+				  expectIterEnd(...itered);
+			   });
 			});
 		 });
 	  });
